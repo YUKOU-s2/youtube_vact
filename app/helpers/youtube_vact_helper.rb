@@ -1,0 +1,2 @@
+module YoutubeVactHelper
+end
