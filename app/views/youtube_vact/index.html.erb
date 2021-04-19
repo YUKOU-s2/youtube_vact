@@ -1,51 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>YouTubeVact</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ここにサイト説明を入れます">
-<meta name="keywords" content="キーワード１,キーワード２,キーワード３,キーワード４,キーワード５">
-<link rel="stylesheet" href="css/style.css">
-<script src="js/fixmenu_pagetop.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-$(function(){
-$('a[href^="#"]').click(function() {
-var speed = 800;
-var href= $(this).attr("href");
-var target = $(href == "#" || href == "" ? 'html' : href);
-var position = target.offset().top;
-$('body,html').animate({scrollTop:position}, speed, 'swing');
-return false;
-});
-});
-</script>
+<%= render "shared/header" %>
+<div class='main'>
 
-</head>
-
-<body>
-
-<header>
-
-</header>
-
-<nav id="menubar">
-  </a><img src="images/title_logo.png" alt="SAMPLE COMPANY">
-<ul>
-<li><a href="#new">Group</a></li>
-<li><a href="#company">Voice</a></li>
-<li><a href="#service">Script</a></li>
-<li><a href="#contact">MyPage</a></li>
-</ul>
-</nav>
-
-<footer>
-<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
-<span class="pr"></span>
-</footer>
-
-
-</body>
-</html>
+</div>
+<%= render "shared/footer" %>

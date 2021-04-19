@@ -1,0 +1,110 @@
+<%= render "shared/header" %>
+
+<%# 商品の概要 %>
+<div class="youtube_vact-show">
+  <div class="youtube_vact-box">
+    <h2 class="name">
+      <%= @youtube_vact.youtube_vact_name %>
+    </h2>
+    <div class="youtube_vact-img-content">
+      <%= image_tag @youtube_vact.image ,class:"youtube_vact-box-img" %>
+       <% if @youtube_vact.purchase_management.present? %>
+      <div class="sold-out">
+        <span>Sold Out!!</span>
+      </div>
+      <%end%>
+    </div>
+    <div class="youtube_vact-price-box">
+      <span class="youtube_vact-price">
+       <%= "¥#{@youtube_vact.price}" %>
+      </span>
+      <span class="youtube_vact-postage">
+        <%= @youtube_vact.charge.name %>
+      </span>
+    </div>
+   
+   
+   <% if user_signed_in? && @youtube_vact.purchase_management.nil?%>
+    <% if  current_user.id == @youtube_vact.user_id %>
+    <%= link_to "商品の編集", edit_youtube_vact_path, method: :get, class: "youtube_vact-red-btn" %>
+     <p class="or-text">or</p>
+    <%= link_to "削除", youtube_vact_path, method: :delete, class:"youtube_vact-destroy" %>
+   <% else %>
+    <%= link_to "購入画面に進む", youtube_vact_purchases_path(@youtube_vact.id),class:"youtube_vact-red-btn"%>
+    <%end%>
+   <%end%>
+
+    <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+  
+    <div class="youtube_vact-explain-box">
+      <span><%= @youtube_vact.introduction %></span>
+    </div>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-youtube_vact">出品者</th>
+          <td class="detail-value"><%= @youtube_vact.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-youtube_vact">カテゴリー</th>
+          <td class="detail-value"><%= @youtube_vact.category.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-youtube_vact">商品の状態</th>
+          <td class="detail-value"><%= @youtube_vact.condition.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-youtube_vact">配送料の負担</th>
+          <td class="detail-value"><%= @youtube_vact.charge.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-youtube_vact">発送元の地域</th>
+          <td class="detail-value"><%= @youtube_vact.area.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-youtube_vact">発送日の目安</th>
+          <td class="detail-value"><%= @youtube_vact.deliveryTime.name %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="option">
+      <div class="favorite-btn">
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り 0</span>
+      </div>
+      <div class="report-btn">
+        <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
+        <span>不適切な商品の通報</span>
+      </div>
+    </div>
+  </div>
+ 
+  <%# /商品の概要 %>
+
+  <div class="comment-box">
+    <form>
+      <textarea class="comment-text"></textarea>
+      <p class="comment-warn">
+        相手のことを考え丁寧なコメントを心がけましょう。
+        <br>
+        不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      </p>
+      <button type="submit" class="comment-btn">
+        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
+        <span>コメントする<span>
+      </button>
+    </form>
+  </div>
+  <div class="links">
+    <a href="#" class="change-youtube_vact-btn">
+      ＜ 前の商品
+    </a>
+    <a href="#" class="change-youtube_vact-btn">
+      後ろの商品 ＞
+    </a>
+  </div>
+  <a href="#" class="another-youtube_vact"><%= @youtube_vact.category.name %>をもっと見る</a>
+</div>
+
+<%= render "shared/footer" %>
